@@ -1,0 +1,30 @@
+.main_drag {
+    width: 100vw;
+    height: 100vh;
+    padding: 2.5%;
+    background: radial-gradient(circle,black ,grey);
+    background-size: 100% 200%;
+    animation: bg 1s infinite;
+}
+
+.meow {
+    width: 100%;
+    background-color: white;
+    height: 100%;
+    border: 8px dashed black;
+    display: grid;
+    place-items: center;
+    font-size: 32px;
+    border-radius: 16px;
+}
+
+@keyframes bg {
+
+    from,
+    to {
+        background-size: 100% 200%;
+    }
+    50%{
+        background-size: 200% 100%;
+    }
+}

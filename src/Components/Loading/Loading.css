@@ -1,0 +1,43 @@
+.loader_main * {
+    color: white;
+    text-align: center;
+}
+
+.loader_main {
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+    align-items: center;
+    width: 100%;
+    background-color: black;
+    justify-content: center;
+    gap: 20px;
+}
+
+.loader_main h3 {
+    font-size: 26px;
+    font-weight: 300;
+}
+
+.loader_main h3:last-of-type {
+    font-size: 20px;
+}
+
+.loader_main .bat3 {
+    fill: none;
+    stroke-dasharray: 950px;
+    stroke: white;
+    stroke-width: 5px;
+    animation: load 15s infinite linear;
+    transform: rotateZ(-45deg);
+}
+
+@keyframes load {
+    0% {
+        stroke-dashoffset: 0px;
+    }
+
+    100% {
+        stroke-dashoffset: 9500px;
+    }
+}
