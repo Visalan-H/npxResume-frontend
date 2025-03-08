@@ -17,7 +17,7 @@ npx @vizzalan/npx-resume [username]
 
 ## Quick Start
 
-1. **Upload your resume**: Visit [npx-resume.com](https://npx-resume.vercel.app/) and upload your PDF
+1. **Upload your resume**: Visit [npx-resume](https://npx-resume.vercel.app/) and upload your PDF
 2. **Choose username**: Select a unique username for your npm package
 3. **Share**: Use your custom command `npx @vizzalan/npx-resume [username]` anywhere
 
@@ -33,6 +33,6 @@ npx @vizzalan/npx-resume [username]
 - You control what's in your resume
 - We don't store the original PDF after conversion
   
-## License
+## 📄 License
 
-MIT
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
