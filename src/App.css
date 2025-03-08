@@ -2,24 +2,13 @@
     max-width: 100vw;
     min-height: 100vh;
     text-align: center;
-    background-color: grey;
+    background-color: #2f184b;
     padding: 10px 20px;
+    color: #f4effa;
 }
-
-.input_main {
-    padding: 2em 0;
-    width: max(280px, 50%);
-    margin: 0 auto;
-    border: 2px solid white;
-    border-radius: 8px;
-    margin-bottom: 30px;
-    display: flex;
-    align-items: center;
-}
-
 
 .home_main h1 {
-    margin: 21.5vh 0 0.4em;
+    margin: 10vh 0 0.4em;
     font-size: 46px;
     letter-spacing: 1px;
 }
@@ -32,11 +21,19 @@
 
 .pdf_main {
     text-align: left;
-    border: 1px solid black;
+    border: 1px solid;
     border-radius: 8px;
     padding: 12px 10px 0;
-    width: max(280px,40%);
+    width: max(280px, 40%);
     margin: 20px auto 0;
+}
+
+.nopdf_main {
+    margin: 50px auto 0;
+}
+
+.nopdf_main h2 {
+    font-weight: 400;
 }
 
 button {
@@ -46,40 +43,160 @@ button {
     border: 1px solid;
     cursor: pointer;
     transition: all 0.3s;
+    background-color: #f4effa;
+    color: #2f184b;
 }
 
 button:hover {
     letter-spacing: 3px;
     scale: 0.95;
+    background-color: #2f184b;
+    color: #f4effa;
 }
 
-.input_main input {
-    width: 85%;
+button:active {
+    scale: 0.9;
 }
 
-.input_main input::-webkit-file-upload-button {
-    width: 85%;
-    padding: 1em 0;
-    cursor: pointer;
-    border: 1px solid;
-    outline: 0;
-    border-radius: 12px;
-    transition: all 0.3s;
+.userandfile {
+    width: 80%;
+    margin: 0 auto;
+    min-height: 250px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.inputt {
+    border: 2px solid white;
+    border-radius: 8px;
+    flex-basis: 45%;
+    padding: 2em 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 190px;
+}
+
+.inputt label {
+    font-size: 20px;
+    letter-spacing: 0.5px;
+}
+
+#namee {
     font-size: 18px;
+    padding: 0.8em;
+    border: 0;
+    border-radius: 8px;
+    background-color: #f4effa;
+    color: #2f184b;
 }
 
-.input_main label {
-    width: 15%;
+#namee:focus {
+    border: 1px solid #2f184b;
 }
 
-.input_main input::-webkit-file-upload-button:hover {
-    letter-spacing: 3px;
+.file {
+    position: relative;
 }
-@media only screen and (max-width:768px){
-    .input_main label{
-        display: none;
+
+.file label {
+    margin-bottom: 1.75em;
+}
+
+.file i {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 64px;
+}
+
+.file input {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    cursor: pointer;
+    left: 0;
+    z-index: 15;
+    position: absolute;
+    opacity: 0;
+}
+
+@media only screen and (max-width:992px) {
+    .pdf_main h3 {
+        font-size: 18px;
     }
-    .input_main input{
-        flex: 1;
+}
+
+@media only screen and (max-width:768px) {
+    .inputt {
+        flex-basis: 100%;
+        margin-bottom: 20px;
+        padding: 2em 0.5em;
+    }
+
+    .userandfile {
+        width: 100%;
+    }
+
+    .pdf_main {
+        width: 100%;
+    }
+}
+
+.done_main {
+    background-color: #2f184b;
+    color: #f4effa;
+    height: 100vh;
+    width: 100vw;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-direction: column;
+}
+
+.done_main h2 {
+    font-size: 36px;
+    margin: 0 auto;
+    width: max-content;
+}
+
+.done_main h1 {
+    font-size: 42px;
+    padding: 10px 0.5em;
+    margin: 0 auto;
+    width: max-content;
+    background-color: #f4effa;
+    color: #2f184b;
+    position: relative;
+    border-radius: 8px;
+}
+
+.done_main h1 i {
+    background-color: #2f184b;
+    border-radius: 8px;
+    border: 4px solid #f4effa;
+    position: absolute;
+    color: #f4effa;
+    height: 100%;
+    top: 0;
+    right: 0;
+    padding: 0 10px;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+}
+
+@media only screen and (max-width:768px) {
+    .done_main h2 {
+        font-size: 4vw;
+    }
+
+    .done_main h1 {
+        font-size: 6vw;
     }
 }

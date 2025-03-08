@@ -6,3 +6,11 @@
     box-sizing: border-box;
     font-family: Electrolize,'serif';
 }
+html{
+    scrollbar-width: thin;
+    scrollbar-color: #2f184b #f4effa;
+}
+*::selection:not(.userselect){
+    color: #2f184b;
+    background-color: #f4effa;
+}

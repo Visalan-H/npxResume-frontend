@@ -1,15 +1,19 @@
 import './App.css'
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Loading from './Components/Loading/Loading'
 import axios from 'axios'
 import Drag from './Components/Drag/Drag';
+import { ToastContainer, toast } from 'react-toastify';
 
 function App() {
 
   const [pdf, setPdf] = useState(null);
   const [text, setText] = useState("Drop it like it's hot");
   const [dropping, setDropping] = useState(false);
-  // const [username, setUsername] = useState("")
+  const [loading, setLoading] = useState(false);
+  const [done, setDone] = useState(false)
+  const [position, setPosition] = useState([0, 0])
+  const [usernamee, setUsernamee] = useState("")
   const username = useRef("")
   const [status, setStatus] = useState("")
   const buttonRef = useRef()
@@ -17,7 +21,7 @@ function App() {
 
   const handleChange = (e) => {
     const file = e.target.files[0];
-    if (file && status !="✅ Available"){
+    if (file && status != "✅ Available") {
       setPdf(file);
     }
     if (file && status == "✅ Available") {
@@ -26,33 +30,52 @@ function App() {
     }
   };
   const handleSubmit = () => {
-    console.log(pdf)
+    // console.log(pdf)
     if (!pdf) return;
-    if (status == "❌ Taken" || !username) return;
+    if (status == "❌ Taken" || !username.current.value) return;
+    toast('Please wait while we load')
+    setTimeout(() => {
+      setLoading(true)
+    }, 3000)
     const formData = new FormData();
-    formData.append("username", username)
+    formData.append("username", username.current.value)
     formData.append("pdfFile", pdf)
-    axios.post("http://localhost:3000/add", formData, {
+    // setLoading(true);
+    axios.post(`${import.meta.env.VITE_BASE_URL}/add`, formData, {
       headers: { "Content-Type": "multipart/form-data" }
     })
-      .then(() => {
-        console.log("Upload successful");
+      .then((res) => {
+        // console.log(res)
+        setUsernamee(res.data.username)
+        setLoading(false);
+        setDone(true)
+        // console.log("Upload successful");
       })
       .catch((err) => {
-        console.error("Upload failed", err);
+        toast('Error!')
+        setLoading(false);
+        // console.error("Upload failed", err);
       });
   }
 
   window.addEventListener('dragover', (e) => {
     e.preventDefault();
     setDropping(true)
+    // console.log(e.dataTransfer.files[0])
   })
 
+  document.addEventListener("dragstart", (event) => {
+    event.preventDefault();
+  });
   window.addEventListener('drop', (e) => {
     e.preventDefault();
     if (e.dataTransfer.files[0].type == "pdf" || e.dataTransfer.files[0].type == "application/pdf") {
       setPdf(e.dataTransfer.files[0])
-      setDropping(false)
+      setPosition([e.clientX, e.clientY])
+      setTimeout(() => {
+        setDropping(false)
+        setPosition([0, 0])
+      }, 1200)
     }
     else {
       setText("Only Pdf's are allowed")
@@ -70,6 +93,7 @@ function App() {
   }
 
   const fetchUser = () => {
+    // console.log("fetch")
     if (username.current.value.includes(" ")) {
       setStatus("No Spaces are allowed🥺")
       return;
@@ -93,33 +117,53 @@ function App() {
         if (axios.isCancel(err)) {
           console.log("Request canceled");
         } else {
-          console.error("Error checking username:", err);
+          console.error("Error checking if username exists");
         }
       });
   }
 
   const handleUsernameChange = debounce(fetchUser, 500)
 
-  // const handleUsernameChange1 = (e) => {
-  //   const newUsername = e.target.value;
+  const handleCopy = () => {
+    navigator.clipboard.writeText(`npx @vizzalan/npx-resume ${usernamee}`);
+    toast('Copied to clipboard!')
+  }
 
-  //   deb(e.target.value)
-  // };
-
-  if (dropping) return <Drag text={text} />
+  if (dropping) return <Drag position={position} text={text} />
+  if (loading) return <Loading />
+  if (done) return <div className="done_main">
+    <ToastContainer
+      position="top-center"
+      autoClose={3000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick={false}
+      pauseOnFocusLoss
+      draggable
+      theme="dark"
+    />
+    <h2>Copy Paste this command in your terminal</h2>
+    <h1 className='userselect'>npx @vizzalan/npx-resume {usernamee} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i onClick={handleCopy} title='copy' className='fa fa-copy'></i></h1>
+  </div>
 
   return (
 
     <div className='home_main'>
       <h1>Upload or Drag and Drop your Resume</h1>
       <h3>We will give you a npx command that displays your resume in terminal.</h3>
-      <div className='input_main'>
-        <label htmlFor="resume">Upload here:</label>
-        <input onChange={handleChange} accept='application/pdf,.pdf' type="file" name="resumeInput" id="resume" />
+      <div className="userandfile">
+        <div className='inputt file'>
+          <label htmlFor="resume">Upload here:</label>
+          <input onChange={handleChange} accept='application/pdf,.pdf' type="file" name="resumeInput" id="resume" className='userselect'/>
+          <i className="fa-solid fa-cloud-arrow-up"></i>
+        </div>
+        <div className='inputt username'>
+          <label htmlFor="namee">Enter Username</label>
+          <input maxLength={30} id='namee' type="text" ref={username} onChange={handleUsernameChange} />
+          <p>{status}</p>
+        </div>
       </div>
-      <button disabled ref={buttonRef} onClick={handleSubmit}>Submit</button>
-      <input type="text" ref={username} onChange={handleUsernameChange} />
-      <p>{status}</p>
+      <button ref={buttonRef} onClick={handleSubmit}>Submit</button>
       {pdf &&
         <div className='pdf_main'>
           <h3>Name: {pdf.name}</h3>
@@ -127,6 +171,22 @@ function App() {
           <h3>Type: {pdf.type}</h3>
         </div>
       }
+      {!pdf &&
+        <div className="nopdf_main">
+          <h2>Command: npx @vizzalan/npx-resume &lt;username&gt;</h2>
+        </div>
+      }
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        pauseOnFocusLoss
+        draggable
+        theme="dark"
+      />
+
     </div>
   )
 }

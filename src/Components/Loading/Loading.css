@@ -5,6 +5,7 @@
 
 .loader_main {
     display: flex;
+    overflow: hidden;
     flex-direction: column;
     height: 100dvh;
     align-items: center;

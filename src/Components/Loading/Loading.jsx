@@ -4,7 +4,7 @@ import './Loading.css'
 function Loading() {
   return (
     <div className="loader_main">
-      <h3>Please wait..</h3>
+      <h3>Please wait while we upload your file..</h3>
       <h3>Batman(vizz) is on his way</h3>
       <svg
         className="bat3"

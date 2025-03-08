@@ -2,29 +2,65 @@
     width: 100vw;
     height: 100vh;
     padding: 2.5%;
-    background: radial-gradient(circle,black ,grey);
+    /* background: radial-gradient(circle,#2f184b ,#f4effa); */
+    background-color: black;
+    color: orange;
     background-size: 100% 200%;
     animation: bg 1s infinite;
+    cursor: url('/fire.png') 32 32, auto;
 }
+
 
 .meow {
     width: 100%;
-    background-color: white;
+    background-color: black;
     height: 100%;
-    border: 8px dashed black;
+    border: 8px dashed white;
     display: grid;
     place-items: center;
     font-size: 32px;
     border-radius: 16px;
 }
 
-@keyframes bg {
+@keyframes blast {
+    0% {
+        background-position: 5% 55%;
+    }
 
-    from,
-    to {
-        background-size: 100% 200%;
+    16.66% {
+        background-position: 16% 55%;
     }
-    50%{
-        background-size: 200% 100%;
+
+    33.33% {
+        background-position: 30% 55%;
     }
+
+    50% {
+        background-position: 47% 55%;
+    }
+
+    66.6% {
+        background-position: 62% 55%;
+    }
+
+    83.3% {
+        background-position: 80% 55%;
+    }
+
+    100% {
+        background-position: 93.5% 55%;
+    }
+}
+
+.ani {
+    visibility: hidden;
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    scale: 1.5;
+    background:url('/blast2.png');
+    background-size: 1000% 200%;
+    background-repeat: no-repeat;
+    background-position: 5% 55%;
+    animation: blast 1.25s steps(1) 0.5s;
 }
