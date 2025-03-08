@@ -103,7 +103,7 @@ function App() {
       return;
     }
     axios
-      .get(`http://localhost:3000/user/${username.current.value}`)
+      .get(`${import.meta.env.VITE_BASE_URL}/user/${username.current.value}`)
       .then((res) => {
         setStatus(res.data.available === "yes" ? "✅ Available" : "❌ Taken");
         if (res.data.available === "yes" && pdf) {
