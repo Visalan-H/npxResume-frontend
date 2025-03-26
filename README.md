@@ -1,12 +1,38 @@
-# React + Vite
+# npx-resume
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> Share your resume through the terminal with colors and clickable links
 
-Currently, two official plugins are available:
+## What is npx-resume?
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+`npx-resume` converts your PDF resume into a terminal-friendly format that anyone can view by running a simple command. Your resume will display beautifully formatted with colors and working hyperlinks directly in their terminal.
 
-## Expanding the ESLint configuration
+## Installation
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Make sure your computer has npx by putting "npx -v" in your terminal.
+
+## This is how your command will look like:
+```bash
+npx @vizzalan/npx-resume [username]
+```
+
+## Quick Start
+
+1. **Upload your resume**: Visit [npx-resume](https://npx-resume.vercel.app/) and upload your PDF
+2. **Choose username**: Select a unique username for your npm package
+3. **Share**: Use your custom command `npx @vizzalan/npx-resume [username]` anywhere
+
+## Features
+
+- Terminal-optimized resume display.
+- Syntax highlighting for different resume sections using Gemini API.
+- Working links (email, website, GitHub, LinkedIn, etc.)
+- Adapts to terminal size and capabilities.
+
+### Privacy
+
+- You control what's in your resume
+- We don't store the original PDF after conversion
+  
+## 📄 License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
