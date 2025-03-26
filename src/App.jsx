@@ -48,7 +48,7 @@ function App() {
         // console.log(res)
         setUsernamee(res.data.username)
         setLoading(false);
-        setDone(true)
+        setDone(true);
         // console.log("Upload successful");
       })
       .catch((err) => {
@@ -130,7 +130,6 @@ function App() {
   }
 
   if (dropping) return <Drag position={position} text={text} />
-  if (loading) return <Loading />
   if (done) return <div className="done_main">
     <ToastContainer
       position="top-center"
@@ -145,6 +144,7 @@ function App() {
     <h2>Copy Paste this command in your terminal</h2>
     <h1 className='userselect'>npx @vizzalan/npx-resume {usernamee} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i onClick={handleCopy} title='copy' className='fa fa-copy'></i></h1>
   </div>
+  if (loading) return <Loading />
 
   return (
 
